@@ -1,0 +1,9 @@
+{
+  "extends": "standard",
+  "plugins": ["react"],
+  "rules": {
+    "space-before-function-paren": "off",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error"
+  }
+}
