@@ -4,6 +4,7 @@
   "rules": {
     "space-before-function-paren": "off",
     "react/jsx-uses-react": "error",
-    "react/jsx-uses-vars": "error"
+    "react/jsx-uses-vars": "error",
+    "comma-dangle": ["error", "only-multiline"]
   }
 }
