@@ -1,4 +1,5 @@
 const electron = require('electron')
+const { OAuth2Provider } = require('electron-oauth-helper')
 // Module to control application life.
 const app = electron.app
 // Module to create native browser window.
@@ -18,6 +19,7 @@ function createWindow() {
     height: 1080,
     webPreferences: {
       experimentalFeatures: true,
+      session: true,
     },
   })
   mainWindow.maximize()
@@ -37,11 +39,26 @@ function createWindow() {
     mainWindow = null
   })
 }
-
+const config = {
+  client_id: 'f880e12697f24d8690fe20f1f04fc98b',
+  client_secret: 'e827af8d991c475ba80d481b8534078c',
+  redirect_uri: 'http://localhost:3000',
+  authorize_url: 'https://accounts.spotify.com/authorize',
+  response_type: 'token',
+}
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+// app.on('ready', createWindow)
+app.on('ready', () => {
+  createWindow()
+
+  const provider = new OAuth2Provider(config)
+  provider
+    .perform()
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+})
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
