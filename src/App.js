@@ -1,53 +1,47 @@
 import React, { Component } from 'react'
-import { ipcRenderer } from 'electron'
-import { Link } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import './App.css'
 
 import Main from './components/Main'
+import PlaylistsContainer from './components/PlaylistsContainer'
 
 class App extends Component {
-  constructor() {
-    super()
-    this.state = {
-      accessToken: null,
-    }
-  }
-
-  componentDidMount() {
-    ipcRenderer.on('spotify-oauth-token', (event, { access_token: token }) => {
-      this.setState({ accessToken: token })
-    })
-
-    ipcRenderer.send('spotify-oauth', {})
-  }
-
-  render() {
-    console.log(this.state)
+  renderContent() {
     return (
       <div className="app">
-        <div className="header">
-          <Link to="/board">Board</Link>
+        <div className="left-sidebar">
+          <PlaylistsContainer {...this.props} />
         </div>
-        <div className="left-sidebar" />
         <div className="right-sidebar" />
         <div className="main">
-          <Main />
+          <Main {...this.props} user={this.props.data.me} />
         </div>
       </div>
     )
   }
+
+  render() {
+    return this.props.data.loading ? null : this.renderContent()
+  }
 }
 
 const query = gql`
-  {
-    currentUser {
-      spotifyId
-      accessToken
-      refreshToken
+  query me($token: String!) {
+    me(token: $token) {
+      id
+      display_name
+      country
     }
   }
 `
 
-export default graphql(query)(App)
+export default graphql(query, {
+  options: props => {
+    return {
+      variables: {
+        token: props.token,
+      },
+    }
+  },
+})(App)

@@ -7,7 +7,7 @@ import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 
 import './index.css'
-import App from './App'
+import AppWrapper from './AppWrapper'
 
 const client = new ApolloClient({
   link: new HttpLink({ uri: 'https://spotify-graphql.herokuapp.com/graphql' }),
@@ -17,7 +17,7 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <HashRouter>
-      <App />
+      <AppWrapper />
     </HashRouter>
   </ApolloProvider>,
   document.getElementById('root')

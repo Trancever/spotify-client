@@ -1,0 +1,17 @@
+.play-button {
+  background: #2ebd59;
+  border: none;
+  border-radius: 30px;
+  height: 36px;
+  width: 140px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: #eee;
+  cursor: pointer;
+}
+
+.play-button:hover {
+  color: #fff;
+  transform: scale(1.03);
+}

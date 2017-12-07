@@ -2,17 +2,23 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 import View from './View'
-import Board from './Board'
+import PlaylistDetailsContainer from './PlaylistDetailsContainer'
 
-const Main = () => {
-  return (
-    <main>
+class Main extends React.Component {
+  render() {
+    return (
       <Switch>
         <Route exact path="/" component={View} />
-        <Route exact path="/board" component={Board} />
+        <Route
+          exact
+          path="/playlist/:playlistId/:ownerId"
+          render={props => (
+            <PlaylistDetailsContainer {...props} {...this.props} />
+          )}
+        />
       </Switch>
-    </main>
-  )
+    )
+  }
 }
 
 export default Main

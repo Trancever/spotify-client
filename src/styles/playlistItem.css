@@ -1,0 +1,7 @@
+.playlist-item > a {
+  font-size: 16px;
+  font-family: 'Catamaran', sans-serif;
+  cursor: pointer;
+  color: #fff;
+  text-decoration: none !important;
+}

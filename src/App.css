@@ -6,16 +6,10 @@
   height: 100vh;
 }
 
-.header {
-  background: green;
-  grid-column: 2;
-  grid-row: 1;
-}
-
 .left-sidebar {
-  background: blue;
   grid-column: 1;
   grid-row: 1 / 3;
+  margin: 0;
 }
 
 .right-sidebar {
@@ -27,5 +21,8 @@
 .main {
   background: orange;
   grid-column: 2;
-  grid-row: 2;
+  grid-row: 1 / 3;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 300px auto;
 }

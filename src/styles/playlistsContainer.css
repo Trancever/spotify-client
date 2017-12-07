@@ -1,0 +1,14 @@
+.playlists-container {
+  background: #111;
+  height: 100%;
+  color: #fff;
+  padding-left: 20px;
+  margin-top: -15px;
+}
+
+p.title {
+  font-size: 14px;
+  font-weight: 100;
+  font-family: 'Source Sans Pro', sans-serif;
+  letter-spacing: 1px;
+}
