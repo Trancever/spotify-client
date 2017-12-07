@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { ipcRenderer } from 'electron'
 import { Link } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -7,15 +8,27 @@ import './App.css'
 import Main from './components/Main'
 
 class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      accessToken: null,
+    }
+  }
+
+  componentDidMount() {
+    ipcRenderer.on('spotify-oauth-token', (event, { access_token: token }) => {
+      this.setState({ accessToken: token })
+    })
+
+    ipcRenderer.send('spotify-oauth', {})
+  }
+
   render() {
-    console.log(this.props)
+    console.log(this.state)
     return (
       <div className="app">
         <div className="header">
           <Link to="/board">Board</Link>
-          <a href="https://spotify-graphql.herokuapp.com/auth/spotify">
-            Login with Spotify
-          </a>
         </div>
         <div className="left-sidebar" />
         <div className="right-sidebar" />

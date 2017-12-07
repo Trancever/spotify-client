@@ -1,4 +1,5 @@
 const electron = require('electron')
+const ipcMain = require('electron').ipcMain
 const { OAuth2Provider } = require('electron-oauth-helper')
 // Module to control application life.
 const app = electron.app
@@ -39,6 +40,7 @@ function createWindow() {
     mainWindow = null
   })
 }
+
 const config = {
   client_id: 'f880e12697f24d8690fe20f1f04fc98b',
   client_secret: 'e827af8d991c475ba80d481b8534078c',
@@ -46,19 +48,23 @@ const config = {
   authorize_url: 'https://accounts.spotify.com/authorize',
   response_type: 'token',
 }
+
+const provider = new OAuth2Provider(config)
+
+ipcMain.on('spotify-oauth', (event, arg) => {
+  provider
+    .perform()
+    .then(token => {
+      event.sender.send('spotify-oauth-token', token)
+    })
+    .catch(err => console.log(err))
+})
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 // app.on('ready', createWindow)
-app.on('ready', () => {
-  createWindow()
-
-  const provider = new OAuth2Provider(config)
-  provider
-    .perform()
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
-})
+app.on('ready', createWindow)
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
