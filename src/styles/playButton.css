@@ -15,3 +15,7 @@
   color: #fff;
   transform: scale(1.03);
 }
+
+.play-button:focus {
+  outline: none;
+}
