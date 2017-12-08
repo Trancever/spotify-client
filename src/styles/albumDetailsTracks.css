@@ -1,0 +1,10 @@
+.album-details-tracks-container {
+  background: rgba(22, 22, 22, 1);
+  height: 100%;
+  padding: 0 40px;
+}
+
+.album-tracks-list {
+  margin: 0;
+  padding: 0;
+}

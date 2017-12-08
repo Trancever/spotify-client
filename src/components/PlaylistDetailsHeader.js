@@ -4,7 +4,13 @@ import '../styles/playlistDetailsHeader.css'
 
 import PlayButton from './PlayButton'
 
-const PlaylistDetailsHeader = ({ imageUrl, name, description, createdBy }) => {
+const PlaylistDetailsHeader = ({
+  imageUrl,
+  name,
+  description,
+  createdBy,
+  type,
+}) => {
   function handleButtonClick() {
     console.log('Button clicked')
   }
@@ -13,11 +19,17 @@ const PlaylistDetailsHeader = ({ imageUrl, name, description, createdBy }) => {
     <div className="wrapper">
       <div className="header-box">
         <div className="left-box">
-          <img src={imageUrl} alt="Nothing" width="230" height="230" />
+          <img
+            className="header-image"
+            src={imageUrl}
+            alt="Nothing"
+            width="230"
+            height="230"
+          />
         </div>
         <div className="right-box">
           <div>
-            <p className="white-text small-text sans-serif-text">Playlist</p>
+            <p className="white-text small-text sans-serif-text">{type}</p>
             <p className="white-text heading-text">{name}</p>
             {description ? (
               <p className="grey-text small-text">{description}</p>

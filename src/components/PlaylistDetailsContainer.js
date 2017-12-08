@@ -8,7 +8,6 @@ import PlaylistDetailsTracks from './PlaylistDetailsTracks'
 
 class PlaylistDetailsContainer extends React.Component {
   render() {
-    console.log(this.props)
     const data = this.props.myPlaylist.myPlaylist
     return [
       <div className="playlist-details-header" key="header">
@@ -18,6 +17,7 @@ class PlaylistDetailsContainer extends React.Component {
             description={data.description}
             imageUrl={data.images[0].url}
             createdBy={this.props.user.display_name}
+            type="Playlist"
           />
         )}
       </div>,
@@ -61,7 +61,7 @@ const myPlaylistTracksQuery = gql`
           id
           album {
             name
-            release_date
+            id
           }
           artists {
             name

@@ -74,7 +74,7 @@ class PlaylistDetailsTracks extends React.Component {
                   <Link to="">{track.artists[0].name}</Link>
                 </div>
                 <div className="album-column ellipsis-wrap">
-                  <Link to={`/album/${track.album.name}`}>
+                  <Link to={`/album/${track.album.id}`}>
                     {track.album.name}
                   </Link>
                 </div>
