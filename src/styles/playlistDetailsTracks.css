@@ -20,9 +20,10 @@
 }
 
 li.list-header {
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: 1px;
   font-family: 'Source Sans Pro', sans-serif;
+  color: #ddd;
 }
 
 .list-header-container {
@@ -33,6 +34,10 @@ li.list-header {
 .list-item-container {
   margin-left: 30px;
   display: flex;
+}
+
+.track-item:hover {
+  background: #232323;
 }
 
 .list-item-container > div > a {

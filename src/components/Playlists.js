@@ -4,11 +4,9 @@ import '../styles/playlist.css'
 import PlaylistItem from './PlaylistItem'
 
 const Playlists = props => {
-  function renderSinglePlaylist(item, index) {
+  return props.data.map((item, index) => {
     return <PlaylistItem key={index} data={item} />
-  }
-
-  return <ul className="playlist">{props.data.map(renderSinglePlaylist)}</ul>
+  })
 }
 
 export default Playlists

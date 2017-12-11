@@ -4,14 +4,14 @@ import gql from 'graphql-tag'
 import './App.css'
 
 import Main from './components/Main'
-import PlaylistsContainer from './components/PlaylistsContainer'
+import LeftSidebar from './components/LeftSidebar'
 
 class App extends Component {
   renderContent() {
     return (
       <div className="app">
         <div className="left-sidebar">
-          <PlaylistsContainer {...this.props} />
+          <LeftSidebar {...this.props} />
         </div>
         <div className="right-sidebar" />
         <div className="main">

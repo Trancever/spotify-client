@@ -24,26 +24,32 @@
 }
 
 .album-index-column {
-  color: #fff;
   flex: 1;
 }
 
 .album-title-column {
-  color: #fff;
   flex: 14;
 }
 
 .album-time-column {
-  color: #ddd;
   flex: 1;
 }
 
 .album-popularity-column {
-  color: #ddd;
   flex: 1;
 }
 
-.album-track-header {
+.album-grey {
+  color: #ddd;
+}
+
+.album-white {
+  color: #fff;
+}
+
+li.album-track-header {
   font-family: 'Source Sans Pro', sans-serif;
   letter-spacing: 1px;
+  font-size: 12px;
+  color: #ddd;
 }

@@ -11,10 +11,10 @@ class PlaylistsContainer extends React.Component {
       ? []
       : this.props.data.myPlaylists.items
     return (
-      <div className="playlists-container">
-        <p className="title">PLAYLISTS</p>
+      <ul className="playlists-list">
+        <li className="playlists-header">PLAYLISTS</li>
         <Playlists data={data} />
-      </div>
+      </ul>
     )
   }
 }

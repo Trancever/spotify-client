@@ -17,9 +17,9 @@ const AlbumDetailsTracks = ({ data }) => {
         {data.map((track, index) => {
           return (
             <li key={track.id} className="album-tracks-row album-track-item">
-              <div className="album-index-column">{index + 1}</div>
-              <div className="album-title-column">{track.name}</div>
-              <div className="album-time-column">
+              <div className="album-index-column album-white">{index + 1}</div>
+              <div className="album-title-column album-white">{track.name}</div>
+              <div className="album-time-column album-grey">
                 {milisecondsToMMSS(track.duration_ms)}
               </div>
             </li>

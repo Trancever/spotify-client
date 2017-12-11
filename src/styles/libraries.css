@@ -1,15 +1,15 @@
-.playlists-list {
+.libraries-list {
   list-style: none;
   color: #fff;
   padding: 0;
   margin: 0;
 }
 
-.playlists-list > li {
+.libraries-list > li {
   padding: 5px;
 }
 
-.playlists-header {
+.library-header {
   font-size: 12px;
   font-weight: 100;
   font-family: 'Source Sans Pro', sans-serif;
@@ -17,7 +17,7 @@
   color: #ddd;
 }
 
-.playlist-item {
+.library-item {
   font-size: 14px;
   font-family: 'Catamaran', sans-serif;
   cursor: pointer;
