@@ -3,7 +3,7 @@ import { compose, graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import '../styles/playlistDetailsContainer.css'
 
-import PlaylistDetailsHeader from './PlaylistDetailsHeader'
+import DetailsHeader from './DetailsHeader'
 import PlaylistDetailsTracks from './PlaylistDetailsTracks'
 
 class PlaylistDetailsContainer extends React.Component {
@@ -12,12 +12,12 @@ class PlaylistDetailsContainer extends React.Component {
     return [
       <div className="playlist-details-header" key="header">
         {this.props.myPlaylist.loading ? null : (
-          <PlaylistDetailsHeader
+          <DetailsHeader
             name={data.name}
             description={data.description}
             imageUrl={data.images[0].url}
             createdBy={this.props.user.display_name}
-            type="Playlist"
+            type="PLAYLIST"
           />
         )}
       </div>,
@@ -52,8 +52,14 @@ const myPlaylistTracksQuery = gql`
     $userId: String!
     $playlistId: String!
     $token: String!
+    $limit: Int!
   ) {
-    myPlaylistTracks(userId: $userId, playlistId: $playlistId, token: $token) {
+    myPlaylistTracks(
+      userId: $userId
+      playlistId: $playlistId
+      token: $token
+      limit: $limit
+    ) {
       items {
         track {
           duration_ms
@@ -93,6 +99,7 @@ export default compose(
           userId: props.match.params.ownerId,
           playlistId: props.match.params.playlistId,
           token: props.token,
+          limit: 50,
         },
       }
     },

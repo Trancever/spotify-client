@@ -8,3 +8,42 @@
   margin: 0;
   padding: 0;
 }
+
+.album-tracks-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  border-bottom: 1px solid #232323;
+  padding: 10px;
+}
+
+.album-track-item {
+  font-family: 'Lato', sans-serif;
+}
+
+.album-index-column {
+  color: #fff;
+  flex: 1;
+}
+
+.album-title-column {
+  color: #fff;
+  flex: 14;
+}
+
+.album-time-column {
+  color: #ddd;
+  flex: 1;
+}
+
+.album-popularity-column {
+  color: #ddd;
+  flex: 1;
+}
+
+.album-track-header {
+  font-family: 'Source Sans Pro', sans-serif;
+  letter-spacing: 1px;
+}

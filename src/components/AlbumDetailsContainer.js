@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import PlaylistDetailsHeader from './PlaylistDetailsHeader'
+import DetailsHeader from './DetailsHeader'
 import AlbumDetailsTracks from './AlbumDetailsTracks'
 
 class AlbumDetailsContainer extends React.Component {
@@ -11,7 +11,7 @@ class AlbumDetailsContainer extends React.Component {
     return [
       <div className="playlist-details-header" key="header">
         {this.props.data.loading ? null : (
-          <PlaylistDetailsHeader
+          <DetailsHeader
             name={data.name}
             imageUrl={data.images[0].url}
             createdBy={data.artists[0].name}
@@ -43,6 +43,7 @@ const query = gql`
       popularity
       tracks {
         items {
+          id
           name
           duration_ms
         }

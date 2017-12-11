@@ -4,7 +4,7 @@ import '../styles/playlistDetailsHeader.css'
 
 import PlayButton from './PlayButton'
 
-const PlaylistDetailsHeader = ({
+const DetailsHeader = ({
   imageUrl,
   name,
   description,
@@ -45,11 +45,11 @@ const PlaylistDetailsHeader = ({
   )
 }
 
-PlaylistDetailsHeader.propTypes = {
+DetailsHeader.propTypes = {
   imageUrl: PropTypes.string,
   name: PropTypes.string,
   description: PropTypes.string,
   createdBy: PropTypes.string,
 }
 
-export default PlaylistDetailsHeader
+export default DetailsHeader

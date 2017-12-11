@@ -46,22 +46,17 @@ li.list-header {
 }
 
 .title-column {
-  flex: 2;
+  flex: 5;
   margin: 0 5px;
 }
 
 .artist-column {
-  flex: 2;
+  flex: 5;
   margin: 0 5px;
 }
 
 .album-column {
-  flex: 2;
-  margin: 0 5px;
-}
-
-.release-column {
-  flex: 1;
+  flex: 5;
   margin: 0 5px;
 }
 
