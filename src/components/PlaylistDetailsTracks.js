@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import '../styles/playlistDetailsTracks.css'
 
 import { milisecondsToMMSS } from '../utils/utils'
+import Filter from './Filter'
 
 class PlaylistDetailsTracks extends React.Component {
   constructor() {
@@ -37,24 +38,12 @@ class PlaylistDetailsTracks extends React.Component {
   render() {
     return (
       <div className="playlist-details-tracks-container">
-        <div className="tracks-filter">
-          <i
-            className="fa fa-search white-color search-icon"
-            aria-hidden="true"
-          />
-          <input
-            className="filter-input"
-            type="text"
-            value={this.state.filter}
-            onChange={this.onFilterChange}
-            placeholder="Filter"
-          />
-          <i
-            onClick={this.onClearIconClick}
-            className="fa fa-times white-color close-icon"
-            aria-hidden="true"
-          />
-        </div>
+        <Filter
+          value={this.state.filter}
+          placeholder="Filter"
+          onChange={this.onFilterChange}
+          onClose={this.onClearIconClick}
+        />
         <ul className="tracks-list">
           <li className="list-header">
             <div className="list-header-container">

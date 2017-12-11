@@ -1,0 +1,42 @@
+.tracks-filter {
+  display: flex;
+  position: relative;
+  font-family: 'Lato', sans-serif;
+}
+
+.filter-input {
+  background: rgba(22, 22, 22, 1);
+  border: none;
+  border-radius: 3px;
+  padding: 10px 0;
+  flex: 1;
+  padding-left: 45px;
+  font-size: 14px;
+  color: #eee;
+}
+
+.filter-input:hover {
+  color: #fff;
+}
+
+.filter-input:focus {
+  background-color: #333;
+  outline: none;
+}
+
+.search-icon {
+  position: absolute;
+  left: 20px;
+  top: 10px;
+}
+
+.close-icon {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.close-icon:hover {
+  color: #bbb;
+}
