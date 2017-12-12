@@ -3,6 +3,8 @@
   flex-direction: row;
   padding: 0 40px;
   height: 800px;
+  flex-wrap: wrap;
+  align-content: flex-start;
 }
 
 .albums-grid > div {

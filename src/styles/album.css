@@ -1,6 +1,12 @@
 .album-box {
   height: 280px;
   width: 220px;
+  position: relative;
+  cursor: default;
+}
+
+.album-image {
+  cursor: pointer;
 }
 
 .album-desc {
@@ -14,4 +20,20 @@
 
 .color-grey {
   color: #bbb;
+}
+
+.image-extender {
+  position: absolute;
+  height: 220px;
+  width: 220px;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.save-tick {
+  color: #74fa74;
+  cursor: default;
 }

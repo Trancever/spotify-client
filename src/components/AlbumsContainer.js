@@ -37,7 +37,11 @@ class AlbumsContainer extends React.Component {
       </div>,
       <div className="albums-list" key="main">
         {this.props.data.loading ? null : (
-          <AlbumsGrid data={this.props.data.myAlbums.items} />
+          <AlbumsGrid
+            data={this.props.data.myAlbums.items}
+            filter={this.state.filter}
+            token={this.props.token}
+          />
         )}
       </div>,
     ]

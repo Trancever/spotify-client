@@ -56,6 +56,7 @@ const config = {
   redirect_uri: 'http://localhost:3000',
   authorize_url: 'https://accounts.spotify.com/authorize',
   response_type: 'token',
+  scope: 'user-library-modify user-library-read',
 }
 
 const provider = new OAuth2Provider(config)

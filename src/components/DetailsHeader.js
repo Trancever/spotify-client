@@ -1,8 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import '../styles/playlistDetailsHeader.css'
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
 
 import PlayButton from './PlayButton'
+import Savebutton from './SaveButton'
 
 const DetailsHeader = ({
   imageUrl,
@@ -10,9 +13,21 @@ const DetailsHeader = ({
   description,
   createdBy,
   type,
+  mutate,
+  token,
+  albumId,
 }) => {
   function handleButtonClick() {
     console.log('Button clicked')
+  }
+
+  function handleSaveAlbum() {
+    mutate({
+      variables: {
+        token: token,
+        albumId: albumId,
+      },
+    })
   }
 
   return (
@@ -37,6 +52,7 @@ const DetailsHeader = ({
             <p className="grey-text small-text">Created by: {createdBy}</p>
             <div className="buttons-container">
               <PlayButton onClick={handleButtonClick} />
+              <Savebutton onClick={handleSaveAlbum} text="SAVE" />
             </div>
           </div>
         </div>
@@ -45,11 +61,22 @@ const DetailsHeader = ({
   )
 }
 
+const mutation = gql`
+  mutation saveAlbumForUser($token: String!, $albumId: String!) {
+    saveAlbumForUser(token: $token, albumId: $albumId) {
+      id
+    }
+  }
+`
+
 DetailsHeader.propTypes = {
   imageUrl: PropTypes.string,
   name: PropTypes.string,
   description: PropTypes.string,
   createdBy: PropTypes.string,
+  albumId: PropTypes.string,
+  token: PropTypes.string,
+  mutate: PropTypes.func,
 }
 
-export default DetailsHeader
+export default graphql(mutation)(DetailsHeader)

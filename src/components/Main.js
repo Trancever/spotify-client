@@ -8,6 +8,7 @@ import AlbumsContainer from './AlbumsContainer'
 
 class Main extends React.Component {
   render() {
+    console.log(this.props)
     return (
       <Switch>
         <Route exact path="/" component={View} />

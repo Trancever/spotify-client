@@ -16,6 +16,8 @@ class AlbumDetailsContainer extends React.Component {
             imageUrl={data.images[0].url}
             createdBy={data.artists[0].name}
             type="ALBUM"
+            token={this.props.token}
+            albumId={data.id}
           />
         )}
       </div>,
