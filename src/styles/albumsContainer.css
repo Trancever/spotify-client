@@ -1,0 +1,9 @@
+.albums-header {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.albums-list {
+  grid-column: 1;
+  grid-row: 2;
+}

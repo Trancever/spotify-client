@@ -1,0 +1,17 @@
+.album-box {
+  height: 280px;
+  width: 220px;
+}
+
+.album-desc {
+  margin: 0;
+  font-size: 15px;
+  font-family: 'Catamaran', sans-serif;
+}
+.color-white {
+  color: #efefef;
+}
+
+.color-grey {
+  color: #bbb;
+}

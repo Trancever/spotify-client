@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 import View from './View'
 import PlaylistDetailsContainer from './PlaylistDetailsContainer'
 import AlbumDetailsContainer from './AlbumDetailsContainer'
+import AlbumsContainer from './AlbumsContainer'
 
 class Main extends React.Component {
   render() {
@@ -21,6 +22,11 @@ class Main extends React.Component {
           exact
           path="/album/:albumId"
           render={props => <AlbumDetailsContainer {...props} {...this.props} />}
+        />
+        <Route
+          exact
+          path="/albums"
+          render={() => <AlbumsContainer {...this.props} />}
         />
       </Switch>
     )

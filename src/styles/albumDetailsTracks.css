@@ -21,6 +21,11 @@
 
 .album-track-item {
   font-family: 'Lato', sans-serif;
+  cursor: default;
+}
+
+.album-track-item:hover {
+  background: #232323;
 }
 
 .album-index-column {

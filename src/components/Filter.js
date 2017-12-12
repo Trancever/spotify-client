@@ -13,7 +13,7 @@ const Filter = ({ value, onChange, placeholder = 'Filter', onClose }) => {
         placeholder={placeholder}
       />
       <i
-        onClick={this.onClose}
+        onClick={onClose}
         className="fa fa-times white-color close-icon"
         aria-hidden="true"
       />

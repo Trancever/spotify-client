@@ -17,11 +17,15 @@
   color: #ddd;
 }
 
-.library-item {
+.library-item > a {
   font-size: 14px;
   font-family: 'Catamaran', sans-serif;
   cursor: pointer;
-  color: #ededed;
+  color: #dcdcdc;
   text-decoration: none !important;
   letter-spacing: 1px;
+}
+
+.library-item > a:hover {
+  color: #fff;
 }
