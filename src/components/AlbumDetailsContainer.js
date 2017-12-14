@@ -1,7 +1,7 @@
 import React from 'react'
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 
-import { album } from '../queries/queries'
+import { album, checkAlbum } from '../queries/queries'
 import DetailsHeader from './DetailsHeader'
 import AlbumDetailsTracks from './AlbumDetailsTracks'
 
@@ -15,9 +15,11 @@ class AlbumDetailsContainer extends React.Component {
   render() {
     const data = this.props.albumData.album
     console.log(this.props)
+    const show =
+      !this.props.albumData.album || !this.props.checkAlbum.checkUserAlbum
     return [
       <div className="playlist-details-header" key="header">
-        {!this.props.albumData.album ? null : (
+        {show ? null : (
           <DetailsHeader
             name={data.name}
             imageUrl={data.images[0].url}
@@ -25,6 +27,7 @@ class AlbumDetailsContainer extends React.Component {
             type="ALBUM"
             token={this.props.token}
             albumId={data.id}
+            isSaved={this.props.checkAlbum.checkUserAlbum.data[0]}
           />
         )}
       </div>,
@@ -37,14 +40,27 @@ class AlbumDetailsContainer extends React.Component {
   }
 }
 
-export default graphql(album, {
-  options: props => {
-    return {
-      variables: {
-        albumId: props.match.params.albumId,
-        token: props.token,
-      },
-    }
-  },
-  name: 'albumData',
-})(AlbumDetailsContainer)
+export default compose(
+  graphql(album, {
+    options: props => {
+      return {
+        variables: {
+          albumId: props.match.params.albumId,
+          token: props.token,
+        },
+      }
+    },
+    name: 'albumData',
+  }),
+  graphql(checkAlbum, {
+    options: props => {
+      return {
+        variables: {
+          albumId: props.match.params.albumId,
+          token: props.token,
+        },
+      }
+    },
+    name: 'checkAlbum',
+  })
+)(AlbumDetailsContainer)

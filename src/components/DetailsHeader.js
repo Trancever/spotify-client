@@ -4,6 +4,7 @@ import '../styles/playlistDetailsHeader.css'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
+import { myAlbums, checkAlbum } from '../queries/queries'
 import PlayButton from './PlayButton'
 import Savebutton from './SaveButton'
 
@@ -16,6 +17,7 @@ const DetailsHeader = ({
   mutate,
   token,
   albumId,
+  isSaved,
 }) => {
   function handleButtonClick() {
     console.log('Button clicked')
@@ -27,7 +29,22 @@ const DetailsHeader = ({
         token: token,
         albumId: albumId,
       },
-      refetchQueries: ['myAlbums'],
+      refetchQueries: [
+        {
+          query: myAlbums,
+          variables: {
+            token: token,
+            limit: 30,
+          },
+        },
+        {
+          query: checkAlbum,
+          variables: {
+            token: token,
+            albumId: albumId,
+          },
+        },
+      ],
     }).then(res => console.log(res))
   }
 
@@ -53,7 +70,10 @@ const DetailsHeader = ({
             <p className="grey-text small-text">Created by: {createdBy}</p>
             <div className="buttons-container">
               <PlayButton onClick={handleButtonClick} />
-              <Savebutton onClick={handleSave} text="SAVE" />
+              <Savebutton
+                onClick={handleSave}
+                text={isSaved ? 'SAVED' : 'SAVE'}
+              />
             </div>
           </div>
         </div>

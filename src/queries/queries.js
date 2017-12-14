@@ -43,3 +43,11 @@ export const album = gql`
     }
   }
 `
+
+export const checkAlbum = gql`
+  query checkUserAlbum($albumId: String!, $token: String!) {
+    checkUserAlbum(albumId: $albumId, token: $token) {
+      data
+    }
+  }
+`

@@ -35,5 +35,5 @@ li.library-header {
 
 .selected-element.library-item > a {
   color: #fff;
-  border-left: 3px solid #7bf045;
+  border-left: 4px solid #7bf045;
 }
