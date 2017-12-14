@@ -5,7 +5,14 @@ import PlaylistItem from './PlaylistItem'
 
 const Playlists = props => {
   return props.data.map((item, index) => {
-    return <PlaylistItem key={index} data={item} />
+    return (
+      <PlaylistItem
+        key={index}
+        data={item}
+        selectedElement={props.selectedElement}
+        onChange={props.onChange}
+      />
+    )
   })
 }
 

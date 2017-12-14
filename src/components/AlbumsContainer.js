@@ -1,8 +1,8 @@
 import React from 'react'
 import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 import '../styles/albumsContainer.css'
 
+import { myAlbums } from '../queries/queries'
 import FilterableHeader from './FilterableHeader'
 import AlbumsGrid from './AlbumsGrid'
 
@@ -48,27 +48,7 @@ class AlbumsContainer extends React.Component {
   }
 }
 
-const query = gql`
-  query myAlbums($token: String!, $limit: Int) {
-    myAlbums(token: $token, limit: $limit) {
-      items {
-        added_at
-        album {
-          id
-          name
-          images {
-            url
-          }
-          artists {
-            name
-          }
-        }
-      }
-    }
-  }
-`
-
-export default graphql(query, {
+export default graphql(myAlbums, {
   options: props => {
     return {
       variables: {

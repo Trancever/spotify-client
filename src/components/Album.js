@@ -2,6 +2,7 @@ import React from 'react'
 import '../styles/album.css'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import { withRouter } from 'react-router-dom'
 
 class Album extends React.Component {
   constructor() {
@@ -16,7 +17,7 @@ class Album extends React.Component {
     this.tickMouseEnter = this.tickMouseEnter.bind(this)
     this.tickMouseLeave = this.tickMouseLeave.bind(this)
     this.handleButtonClick = this.handleButtonClick.bind(this)
-    this.handleButtonClick = this.handleButtonClick.bind(this)
+    this.handleImageClicked = this.handleImageClicked.bind(this)
   }
 
   imageMouseEnter() {
@@ -35,7 +36,8 @@ class Album extends React.Component {
     this.setState({ tickHovered: false })
   }
 
-  handleButtonClick() {
+  handleButtonClick(e) {
+    e.stopPropagation()
     this.props
       .mutate({
         variables: {
@@ -46,12 +48,20 @@ class Album extends React.Component {
       .then(res => console.log(res))
   }
 
+  handleImageClicked() {
+    this.props.history.push(`/album/${this.props.data.album.id}`)
+  }
+
   renderImageExtender() {
     const cssClass = this.state.tickHovered
       ? 'fa fa-times fa-2x'
       : 'fa fa-check fa-2x'
     return (
-      <div className="image-extender" onMouseLeave={this.imageMouseLeave}>
+      <div
+        className="image-extender"
+        onMouseLeave={this.imageMouseLeave}
+        onClick={this.handleImageClicked}
+      >
         <div
           className="save-tick"
           onMouseEnter={this.tickMouseEnter}
@@ -68,7 +78,6 @@ class Album extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     const { data } = this.props
     return (
       <div className="album-box">
@@ -98,4 +107,4 @@ const mutation = gql`
   }
 `
 
-export default graphql(mutation)(Album)
+export default withRouter(graphql(mutation)(Album))

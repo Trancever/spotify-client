@@ -1,14 +1,15 @@
 .save-button {
-  background: #2ebd59;
-  border: none;
+  background: #212121;
+  border: 1px solid #bbb;
   border-radius: 30px;
   height: 36px;
   width: 140px;
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   letter-spacing: 1px;
-  color: #eee;
+  color: #ccc;
   cursor: pointer;
+  margin: 0 10px;
 }
 
 .save-button:hover {

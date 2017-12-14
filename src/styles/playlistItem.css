@@ -2,11 +2,18 @@
   font-size: 14px;
   font-family: 'Catamaran', sans-serif;
   cursor: pointer;
-  color: #dcdcdc;
+  color: #bcbcbc;
   text-decoration: none !important;
   letter-spacing: 1px;
+  font-weight: 600;
+  padding-left: 20px;
 }
 
 .playlist-item > a:hover {
   color: #fff;
+}
+
+.selected-element.playlist-item > a {
+  color: #fff;
+  border-left: 3px solid #7bf045;
 }

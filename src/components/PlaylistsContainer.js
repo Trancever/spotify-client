@@ -10,10 +10,16 @@ class PlaylistsContainer extends React.Component {
     const data = this.props.data.loading
       ? []
       : this.props.data.myPlaylists.items
+
+    const { selectedElement, onChange } = this.props
     return (
       <ul className="playlists-list">
         <li className="playlists-header">PLAYLISTS</li>
-        <Playlists data={data} />
+        <Playlists
+          data={data}
+          selectedElement={selectedElement}
+          onChange={onChange}
+        />
       </ul>
     )
   }

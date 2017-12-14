@@ -21,13 +21,14 @@ const DetailsHeader = ({
     console.log('Button clicked')
   }
 
-  function handleSaveAlbum() {
+  function handleSave() {
     mutate({
       variables: {
         token: token,
         albumId: albumId,
       },
-    })
+      refetchQueries: ['myAlbums'],
+    }).then(res => console.log(res))
   }
 
   return (
@@ -52,7 +53,7 @@ const DetailsHeader = ({
             <p className="grey-text small-text">Created by: {createdBy}</p>
             <div className="buttons-container">
               <PlayButton onClick={handleButtonClick} />
-              <Savebutton onClick={handleSaveAlbum} text="SAVE" />
+              <Savebutton onClick={handleSave} text="SAVE" />
             </div>
           </div>
         </div>
@@ -61,10 +62,26 @@ const DetailsHeader = ({
   )
 }
 
-const mutation = gql`
+const saveAlbumForUser = gql`
   mutation saveAlbumForUser($token: String!, $albumId: String!) {
     saveAlbumForUser(token: $token, albumId: $albumId) {
       id
+      name
+      images {
+        url
+      }
+      artists {
+        id
+        name
+      }
+      popularity
+      tracks {
+        items {
+          id
+          name
+          duration_ms
+        }
+      }
     }
   }
 `
@@ -79,4 +96,4 @@ DetailsHeader.propTypes = {
   mutate: PropTypes.func,
 }
 
-export default graphql(mutation)(DetailsHeader)
+export default graphql(saveAlbumForUser)(DetailsHeader)
