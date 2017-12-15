@@ -18,6 +18,7 @@ class PlaylistDetailsContainer extends React.Component {
             imageUrl={data.images[0].url}
             createdBy={this.props.user.display_name}
             type="PLAYLIST"
+            isSaved
           />
         )}
       </div>,

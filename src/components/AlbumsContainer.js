@@ -33,6 +33,7 @@ class AlbumsContainer extends React.Component {
           onFilterChange={this.onFilterChange}
           onFilterClose={this.onFilterClose}
           filter={this.state.filter}
+          name="Albums"
         />
       </div>,
       <div className="albums-list" key="main">

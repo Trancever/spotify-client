@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 const libraries = [
   { name: 'Your Daily Mix', path: '/daily_mix' },
   { name: 'Recently Played', path: '/recently_played' },
-  { name: 'Songs', path: '/songs' },
+  { name: 'Songs', path: '/tracks' },
   { name: 'Albums', path: '/albums' },
   { name: 'Artists', path: '/artists' },
 ]

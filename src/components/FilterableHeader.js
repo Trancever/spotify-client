@@ -10,11 +10,12 @@ const FilterableHeader = ({
   onSortedByChange,
   filter,
   sortedBy,
+  name,
 }) => {
   return (
     <div className="filterable-header-wrapper">
       <div className="content-box">
-        <p className="filterable-header white-text">Albums</p>
+        <p className="filterable-header white-text">{name}</p>
         <HorizontalLine />
         <Filter
           onChange={onFilterChange}

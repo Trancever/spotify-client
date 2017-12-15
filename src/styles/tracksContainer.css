@@ -1,0 +1,10 @@
+.tracks-details-header {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.tracks-details-wrapper {
+  grid-column: 1;
+  grid-row: 2;
+  padding-top: 20px;
+}

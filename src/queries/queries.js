@@ -51,3 +51,20 @@ export const checkAlbum = gql`
     }
   }
 `
+
+export const myTracks = gql`
+  query myTracks($offset: Int, $limit: Int, $token: String!) {
+    myTracks(offset: $offset, limit: $limit, token: $token) {
+      items {
+        track {
+          id
+          name
+          duration_ms
+        }
+      }
+      limit
+      offset
+      total
+    }
+  }
+`

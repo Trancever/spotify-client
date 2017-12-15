@@ -3,7 +3,7 @@ import { graphql, compose } from 'react-apollo'
 
 import { album, checkAlbum } from '../queries/queries'
 import DetailsHeader from './DetailsHeader'
-import AlbumDetailsTracks from './AlbumDetailsTracks'
+import TracksList from './TracksList'
 
 class AlbumDetailsContainer extends React.Component {
   componentWillReceiveProps(nextProps) {
@@ -14,7 +14,6 @@ class AlbumDetailsContainer extends React.Component {
 
   render() {
     const data = this.props.albumData.album
-    console.log(this.props)
     const show =
       !this.props.albumData.album || !this.props.checkAlbum.checkUserAlbum
     return [
@@ -33,7 +32,7 @@ class AlbumDetailsContainer extends React.Component {
       </div>,
       <div className="playlist-details-wrapper" key="main">
         {!this.props.albumData.album ? null : (
-          <AlbumDetailsTracks data={data.tracks.items} />
+          <TracksList data={data.tracks.items} />
         )}
       </div>,
     ]

@@ -38,14 +38,12 @@ class Album extends React.Component {
 
   handleButtonClick(e) {
     e.stopPropagation()
-    this.props
-      .mutate({
-        variables: {
-          token: this.props.token,
-          albumId: this.props.data.album.id,
-        },
-      })
-      .then(res => console.log(res))
+    this.props.mutate({
+      variables: {
+        token: this.props.token,
+        albumId: this.props.data.album.id,
+      },
+    })
   }
 
   handleImageClicked() {

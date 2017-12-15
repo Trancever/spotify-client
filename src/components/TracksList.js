@@ -1,9 +1,12 @@
 import React from 'react'
-import '../styles/albumDetailsTracks.css'
+import '../styles/tracksList.css'
+import Waypoint from 'react-waypoint'
+import { SyncLoader } from 'react-spinners'
 
 import { milisecondsToMMSS } from '../utils/utils'
 
-const AlbumDetailsTracks = ({ data }) => {
+const TracksList = ({ data, fetchMoreData, fetchingMoreData }) => {
+  console.log(fetchingMoreData)
   return (
     <div className="album-details-tracks-container">
       <ul className="album-tracks-list">
@@ -26,8 +29,12 @@ const AlbumDetailsTracks = ({ data }) => {
           )
         })}
       </ul>
+      <Waypoint onEnter={fetchMoreData} />
+      <div className="spinner-container">
+        <SyncLoader loading={fetchingMoreData} color={'#2ebd59'} size={12} />
+      </div>
     </div>
   )
 }
 
-export default AlbumDetailsTracks
+export default TracksList

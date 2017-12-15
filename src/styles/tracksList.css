@@ -58,3 +58,10 @@ li.album-track-header {
   font-size: 12px;
   color: #ddd;
 }
+
+.spinner-container {
+  margin: 30px 0 30px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
