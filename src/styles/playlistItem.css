@@ -1,7 +1,6 @@
 .playlist-item > a {
   font-size: 14px;
   font-family: 'Catamaran', sans-serif;
-  cursor: pointer;
   color: #bcbcbc;
   text-decoration: none !important;
   letter-spacing: 1px;
@@ -11,6 +10,7 @@
 
 .playlist-item > a:hover {
   color: #fff;
+  cursor: pointer;
 }
 
 .selected-element.playlist-item > a {

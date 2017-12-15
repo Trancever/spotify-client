@@ -23,12 +23,10 @@ const Libraries = props => {
             ? 'library-item selected-element'
             : 'library-item'
         return (
-          <li
-            key={library.path}
-            className={cssClass}
-            onClick={props.onChange(library.name)}
-          >
-            <Link to={library.path}>{library.name}</Link>
+          <li key={library.path} className={cssClass}>
+            <Link onClick={props.onChange(library.name)} to={library.path}>
+              {library.name}
+            </Link>
           </li>
         )
       })}

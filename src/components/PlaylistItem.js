@@ -9,8 +9,11 @@ const PlaylistItem = props => {
       : 'playlist-item'
 
   return (
-    <li onClick={props.onChange(props.data.name)} className={cssClass}>
-      <Link to={`/playlist/${props.data.id}/${props.data.owner.id}`}>
+    <li className={cssClass}>
+      <Link
+        onClick={props.onChange(props.data.name)}
+        to={`/playlist/${props.data.id}/${props.data.owner.id}`}
+      >
         {props.data.name}
       </Link>
     </li>
