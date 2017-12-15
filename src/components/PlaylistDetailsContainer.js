@@ -7,7 +7,50 @@ import DetailsHeader from './DetailsHeader'
 import TracksDetailedList from './TracksDetailedList'
 
 class PlaylistDetailsContainer extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      isFetchingMoreData: false,
+    }
+    this.fetchMoreData = this.fetchMoreData.bind(this)
+  }
+
+  fetchMoreData() {
+    const { myPlaylistTracks } = this.props
+    const { limit, offset, total } = myPlaylistTracks.myPlaylistTracks
+    if (offset + limit < total) {
+      this.setState({ isFetchingMoreData: true })
+      myPlaylistTracks.fetchMore({
+        variables: {
+          offset: offset + limit,
+          limit: 50,
+          token: this.props.token,
+          userId: this.props.match.params.ownerId,
+          playlistId: this.props.match.params.playlistId,
+        },
+        updateQuery: (previousResult, { fetchMoreResult }) => {
+          this.setState({ isFetchingMoreData: false })
+          if (!fetchMoreResult) {
+            return previousResult
+          }
+          const items = [
+            ...previousResult.myPlaylistTracks.items,
+            ...fetchMoreResult.myPlaylistTracks.items,
+          ]
+          const offset = fetchMoreResult.myPlaylistTracks.offset
+          const myPlaylistTracks = {
+            ...previousResult.myPlaylistTracks,
+            items,
+            offset,
+          }
+          return { ...previousResult, myPlaylistTracks }
+        },
+      })
+    }
+  }
+
   render() {
+    console.log(this.props)
     const data = this.props.myPlaylist.myPlaylist
     return [
       <div className="playlist-details-header" key="header">
@@ -26,6 +69,8 @@ class PlaylistDetailsContainer extends React.Component {
         {this.props.myPlaylist.loading ? null : (
           <TracksDetailedList
             data={this.props.myPlaylistTracks.myPlaylistTracks.items}
+            fetchMoreData={this.fetchMoreData}
+            fetchingMoreData={this.state.isFetchingMoreData}
           />
         )}
       </div>,
@@ -53,13 +98,15 @@ const myPlaylistTracksQuery = gql`
     $userId: String!
     $playlistId: String!
     $token: String!
-    $limit: Int!
+    $limit: Int
+    $offset: Int
   ) {
     myPlaylistTracks(
       userId: $userId
       playlistId: $playlistId
       token: $token
       limit: $limit
+      offset: $offset
     ) {
       items {
         track {
@@ -75,6 +122,9 @@ const myPlaylistTracksQuery = gql`
           }
         }
       }
+      limit
+      offset
+      total
     }
   }
 `

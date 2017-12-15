@@ -32,7 +32,7 @@ class AlbumDetailsContainer extends React.Component {
       </div>,
       <div className="playlist-details-wrapper" key="main">
         {!this.props.albumData.album ? null : (
-          <TracksList data={data.tracks.items} />
+          <TracksList data={data.tracks.items} fetchingMoreData={false} />
         )}
       </div>,
     ]

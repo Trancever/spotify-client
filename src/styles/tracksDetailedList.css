@@ -50,6 +50,10 @@ li.list-header {
   text-decoration: underline;
 }
 
+.index-column {
+  flex: 1;
+}
+
 .title-column {
   flex: 5;
   margin: 0 5px;

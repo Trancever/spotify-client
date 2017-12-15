@@ -49,6 +49,7 @@ class TracksDetailedList extends React.Component {
         <ul className="tracks-list">
           <li className="list-header">
             <div className="list-header-container">
+              <div className="index-column">#</div>
               <div className="title-column">TITLE</div>
               <div className="artist-column">ARTIST</div>
               <div className="album-column">ALBUM</div>
@@ -57,9 +58,10 @@ class TracksDetailedList extends React.Component {
               </div>
             </div>
           </li>
-          {this.filterTracks().map(({ track }) => (
+          {this.filterTracks().map(({ track }, index) => (
             <li key={track.id} className="track-item">
               <div className="list-item-container">
+                <div className="index-column">{index + 1}</div>
                 <div className="title-column ellipsis-wrap">{track.name}</div>
                 <div className="artist-column ellipsis-wrap">
                   <Link to="">{track.artists[0].name}</Link>

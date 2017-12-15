@@ -40,7 +40,6 @@ class TracksContainer extends React.Component {
     if (!this.props.tracks.myTracks) return
     const { offset, limit, total } = this.props.tracks.myTracks
     if (offset + limit < total) {
-      console.log('Fetching more data')
       this.setState({ isFetchingMoreData: true })
       this.props.tracks.fetchMore({
         variables: {
