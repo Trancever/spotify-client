@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 export const myAlbums = gql`
-  query myAlbums($token: String!, $limit: Int) {
-    myAlbums(token: $token, limit: $limit) {
+  query myAlbums($token: String!, $limit: Int, $offset: Int) {
+    myAlbums(token: $token, limit: $limit, offset: $offset) {
       items {
         added_at
         album {
@@ -16,6 +16,9 @@ export const myAlbums = gql`
           }
         }
       }
+      limit
+      offset
+      total
     }
   }
 `
@@ -67,6 +70,72 @@ export const myTracks = gql`
           artists {
             name
             id
+          }
+        }
+      }
+      limit
+      offset
+      total
+    }
+  }
+`
+
+export const myPlaylists = gql`
+  query myPlaylists($token: String!) {
+    myPlaylists(token: $token) {
+      items {
+        name
+        id
+        href
+        owner {
+          id
+        }
+      }
+    }
+  }
+`
+
+export const myPlaylist = gql`
+  query myPlaylist($userId: String!, $playlistId: String!, $token: String!) {
+    myPlaylist(userId: $userId, playlistId: $playlistId, token: $token) {
+      id
+      name
+      description
+      images {
+        width
+        height
+        url
+      }
+    }
+  }
+`
+
+export const myPlaylistTracks = gql`
+  query myPlaylistTracks(
+    $userId: String!
+    $playlistId: String!
+    $token: String!
+    $limit: Int
+    $offset: Int
+  ) {
+    myPlaylistTracks(
+      userId: $userId
+      playlistId: $playlistId
+      token: $token
+      limit: $limit
+      offset: $offset
+    ) {
+      items {
+        track {
+          duration_ms
+          name
+          id
+          album {
+            name
+            id
+          }
+          artists {
+            name
           }
         }
       }

@@ -17,6 +17,7 @@ class TracksContainer extends React.Component {
     this.onFilterChange = this.onFilterChange.bind(this)
     this.onFilterClose = this.onFilterClose.bind(this)
     this.fetchMoreData = this.fetchMoreData.bind(this)
+    this.updateQuery = this.updateQuery.bind(this)
   }
 
   onFilterClose() {
@@ -47,25 +48,26 @@ class TracksContainer extends React.Component {
           limit: 50,
           token: this.props.token,
         },
-        updateQuery: (previousResult, { fetchMoreResult }) => {
-          this.setState({ isFetchingMoreData: false })
-          if (!fetchMoreResult) {
-            return previousResult
-          }
-          const items = [
-            ...previousResult.myTracks.items,
-            ...fetchMoreResult.myTracks.items,
-          ]
-          const offset = fetchMoreResult.myTracks.offset
-          const myTracks = { ...previousResult.myTracks, items, offset }
-          return { ...previousResult, myTracks }
-        },
+        updateQuery: this.updateQuery,
       })
     }
   }
 
+  updateQuery(previousResult, { fetchMoreResult }) {
+    this.setState({ isFetchingMoreData: false })
+    if (!fetchMoreResult) {
+      return previousResult
+    }
+    const items = [
+      ...previousResult.myTracks.items,
+      ...fetchMoreResult.myTracks.items,
+    ]
+    const offset = fetchMoreResult.myTracks.offset
+    const myTracks = { ...previousResult.myTracks, items, offset }
+    return { ...previousResult, myTracks }
+  }
+
   render() {
-    console.log(this.props)
     const data = this.props.tracks.loading
       ? []
       : this.props.tracks.myTracks.items

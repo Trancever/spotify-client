@@ -1,8 +1,8 @@
 import React from 'react'
 import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 import '../styles/playlistsContainer.css'
 
+import { myPlaylists } from '../queries/queries'
 import Playlists from './Playlists'
 
 class PlaylistsContainer extends React.Component {
@@ -25,22 +25,7 @@ class PlaylistsContainer extends React.Component {
   }
 }
 
-const query = gql`
-  query myPlaylists($token: String!) {
-    myPlaylists(token: $token) {
-      items {
-        name
-        id
-        href
-        owner {
-          id
-        }
-      }
-    }
-  }
-`
-
-export default graphql(query, {
+export default graphql(myPlaylists, {
   options: props => {
     return {
       variables: {

@@ -1,8 +1,8 @@
 import React from 'react'
 import { compose, graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 import '../styles/playlistDetailsContainer.css'
 
+import { myPlaylist, myPlaylistTracks } from '../queries/queries'
 import DetailsHeader from './DetailsHeader'
 import TracksDetailedList from './TracksDetailedList'
 
@@ -13,6 +13,7 @@ class PlaylistDetailsContainer extends React.Component {
       isFetchingMoreData: false,
     }
     this.fetchMoreData = this.fetchMoreData.bind(this)
+    this.updateQuery = this.updateQuery.bind(this)
   }
 
   fetchMoreData() {
@@ -28,29 +29,30 @@ class PlaylistDetailsContainer extends React.Component {
           userId: this.props.match.params.ownerId,
           playlistId: this.props.match.params.playlistId,
         },
-        updateQuery: (previousResult, { fetchMoreResult }) => {
-          this.setState({ isFetchingMoreData: false })
-          if (!fetchMoreResult) {
-            return previousResult
-          }
-          const items = [
-            ...previousResult.myPlaylistTracks.items,
-            ...fetchMoreResult.myPlaylistTracks.items,
-          ]
-          const offset = fetchMoreResult.myPlaylistTracks.offset
-          const myPlaylistTracks = {
-            ...previousResult.myPlaylistTracks,
-            items,
-            offset,
-          }
-          return { ...previousResult, myPlaylistTracks }
-        },
+        updateQuery: this.updateQuery,
       })
     }
   }
 
+  updateQuery(previousResult, { fetchMoreResult }) {
+    this.setState({ isFetchingMoreData: false })
+    if (!fetchMoreResult) {
+      return previousResult
+    }
+    const items = [
+      ...previousResult.myPlaylistTracks.items,
+      ...fetchMoreResult.myPlaylistTracks.items,
+    ]
+    const offset = fetchMoreResult.myPlaylistTracks.offset
+    const myPlaylistTracks = {
+      ...previousResult.myPlaylistTracks,
+      items,
+      offset,
+    }
+    return { ...previousResult, myPlaylistTracks }
+  }
+
   render() {
-    console.log(this.props)
     const data = this.props.myPlaylist.myPlaylist
     return [
       <div className="playlist-details-header" key="header">
@@ -78,59 +80,8 @@ class PlaylistDetailsContainer extends React.Component {
   }
 }
 
-const myPlaylistQuery = gql`
-  query myPlaylist($userId: String!, $playlistId: String!, $token: String!) {
-    myPlaylist(userId: $userId, playlistId: $playlistId, token: $token) {
-      id
-      name
-      description
-      images {
-        width
-        height
-        url
-      }
-    }
-  }
-`
-
-const myPlaylistTracksQuery = gql`
-  query myPlaylistTracks(
-    $userId: String!
-    $playlistId: String!
-    $token: String!
-    $limit: Int
-    $offset: Int
-  ) {
-    myPlaylistTracks(
-      userId: $userId
-      playlistId: $playlistId
-      token: $token
-      limit: $limit
-      offset: $offset
-    ) {
-      items {
-        track {
-          duration_ms
-          name
-          id
-          album {
-            name
-            id
-          }
-          artists {
-            name
-          }
-        }
-      }
-      limit
-      offset
-      total
-    }
-  }
-`
-
 export default compose(
-  graphql(myPlaylistQuery, {
+  graphql(myPlaylist, {
     name: 'myPlaylist',
     options: props => {
       return {
@@ -142,7 +93,7 @@ export default compose(
       }
     },
   }),
-  graphql(myPlaylistTracksQuery, {
+  graphql(myPlaylistTracks, {
     name: 'myPlaylistTracks',
     options: props => {
       return {
