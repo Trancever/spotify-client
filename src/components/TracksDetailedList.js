@@ -1,11 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import '../styles/playlistDetailsTracks.css'
+import '../styles/tracksDetailedList.css'
+import Waypoint from 'react-waypoint'
+import { SyncLoader } from 'react-spinners'
 
 import { milisecondsToMMSS } from '../utils/utils'
 import Filter from './Filter'
 
-class PlaylistDetailsTracks extends React.Component {
+class TracksDetailedList extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -27,7 +29,7 @@ class PlaylistDetailsTracks extends React.Component {
   filterTracks() {
     const { filter } = this.state
     const pattern = filter.toLowerCase()
-    return this.props.data.items.filter(({ track }) => {
+    return this.props.data.filter(({ track }) => {
       return (
         track.name.toLowerCase().includes(pattern) ||
         track.album.name.includes(pattern)
@@ -74,9 +76,17 @@ class PlaylistDetailsTracks extends React.Component {
             </li>
           ))}
         </ul>
+        <Waypoint onEnter={this.props.fetchMoreData} />
+        <div className="spinner-container">
+          <SyncLoader
+            loading={this.props.fetchingMoreData}
+            color={'#2ebd59'}
+            size={12}
+          />
+        </div>
       </div>
     )
   }
 }
 
-export default PlaylistDetailsTracks
+export default TracksDetailedList

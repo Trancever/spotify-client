@@ -4,7 +4,7 @@ import '../styles/tracksContainer.css'
 
 import { myTracks } from '../queries/queries'
 import FilterableHeader from './FilterableHeader'
-import TracksList from './TracksList'
+import TracksDetailedList from './TracksDetailedList'
 
 class TracksContainer extends React.Component {
   constructor() {
@@ -67,11 +67,9 @@ class TracksContainer extends React.Component {
 
   render() {
     console.log(this.props)
-    const items = this.props.tracks.loading
+    const data = this.props.tracks.loading
       ? []
       : this.props.tracks.myTracks.items
-    const mappedData = this.mapApiResponseToProps(items)
-    const filteredData = this.filterData(mappedData)
     return [
       <div key="header" className="tracks-details-header">
         <FilterableHeader
@@ -82,8 +80,8 @@ class TracksContainer extends React.Component {
         />
       </div>,
       <div key="main" className="tracks-details-wrapper">
-        <TracksList
-          data={filteredData}
+        <TracksDetailedList
+          data={data}
           fetchMoreData={this.fetchMoreData}
           fetchingMoreData={this.state.isFetchingMoreData}
         />

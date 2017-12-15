@@ -60,6 +60,14 @@ export const myTracks = gql`
           id
           name
           duration_ms
+          album {
+            name
+            id
+          }
+          artists {
+            name
+            id
+          }
         }
       }
       limit

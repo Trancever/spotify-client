@@ -4,7 +4,7 @@ import gql from 'graphql-tag'
 import '../styles/playlistDetailsContainer.css'
 
 import DetailsHeader from './DetailsHeader'
-import PlaylistDetailsTracks from './PlaylistDetailsTracks'
+import TracksDetailedList from './TracksDetailedList'
 
 class PlaylistDetailsContainer extends React.Component {
   render() {
@@ -24,8 +24,8 @@ class PlaylistDetailsContainer extends React.Component {
       </div>,
       <div className="playlist-details-wrapper" key="main">
         {this.props.myPlaylist.loading ? null : (
-          <PlaylistDetailsTracks
-            data={this.props.myPlaylistTracks.myPlaylistTracks}
+          <TracksDetailedList
+            data={this.props.myPlaylistTracks.myPlaylistTracks.items}
           />
         )}
       </div>,
