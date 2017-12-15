@@ -3,7 +3,7 @@ import { graphql } from 'react-apollo'
 import '../styles/tracksContainer.css'
 
 import { myTracks } from '../queries/queries'
-import FilterableHeader from './FilterableHeader'
+import SimpleHeader from './SimpleHeader'
 import TracksDetailedList from './TracksDetailedList'
 
 class TracksContainer extends React.Component {
@@ -73,12 +73,7 @@ class TracksContainer extends React.Component {
       : this.props.tracks.myTracks.items
     return [
       <div key="header" className="tracks-details-header">
-        <FilterableHeader
-          filter={this.state.filter}
-          onFilterChange={this.onFilterChange}
-          onFilterClose={this.onFilterClose}
-          name="Songs"
-        />
+        <SimpleHeader name="Songs" />
       </div>,
       <div key="main" className="tracks-details-wrapper">
         <TracksDetailedList

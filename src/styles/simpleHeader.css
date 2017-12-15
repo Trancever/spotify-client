@@ -1,0 +1,28 @@
+.filterable-header-wrapper {
+  height: 100%;
+  background: rgba(70, 70, 70, 1);
+  background: -moz-linear-gradient(
+    top,
+    rgba(70, 70, 70, 1) 0%,
+    rgba(22, 22, 22, 1) 70%
+  );
+  background: -webkit-linear-gradient(
+    top,
+    rgba(70, 70, 70, 1) 0%,
+    rgba(22, 22, 22, 1) 70%
+  );
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.filterable-header {
+  font-size: 50px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.simple-header-button-wrapper {
+  margin: 15px 0 25px 0;
+}
