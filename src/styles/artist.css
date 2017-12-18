@@ -1,9 +1,15 @@
 .artist-wrapper {
-  position: relative;
   border-radius: 50%;
   width: 200px;
   height: 240px;
   margin: 20px 20px 30px 20px;
+}
+
+.image-box {
+  position: relative;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
 }
 
 .faded-box {
@@ -18,7 +24,41 @@
   cursor: pointer;
 }
 
-.artist-wrapper:hover .faded-box {
+.play-image-button {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.7);
+  left: 68px;
+  bottom: 68px;
+  border: 2px solid #ccc;
+  display: none;
+}
+
+.play-image-button:hover {
+  transform: scale(1.1);
+  border: 2px solid #eee;
+}
+
+.play-image-button::after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 16px solid transparent;
+  border-bottom: 16px solid transparent;
+  border-left: 16px solid #eee;
+  left: 25px;
+  top: 14px;
+}
+
+.image-box:hover .faded-box {
+  display: block;
+}
+
+.image-box:hover .play-image-button {
   display: block;
 }
 
@@ -32,4 +72,5 @@
   font-size: 14px;
   font-family: 'Catamaran', sans-serif;
   font-weight: 600;
+  cursor: default;
 }
