@@ -27,11 +27,18 @@ class ArtistsContainer extends React.Component {
     console.log(this.props)
     return [
       <div key="header" className="artists-header">
-        <FilterableHeader name="Artists" />
+        <FilterableHeader
+          name="Artists"
+          onFilterChange={this.onFilterChange}
+          onFilterClose={this.onFilterClose}
+        />
       </div>,
       <div key="main" className="artists-wrapper">
         {this.props.data.loading ? null : (
-          <ArtistsGrid artists={this.props.data.myArtists.items} />
+          <ArtistsGrid
+            artists={this.props.data.myArtists.items}
+            filter={this.state.filter}
+          />
         )}
       </div>,
     ]

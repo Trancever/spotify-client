@@ -3,12 +3,16 @@ import '../styles/artistsGrid.css'
 
 import Artist from './Artist'
 
-const ArtistsGrid = ({ artists }) => {
-  console.log('Artist grid')
+const ArtistsGrid = ({ artists, filter }) => {
+  const pattern = filter.toLowerCase()
   return (
     <div className="artists-grid">
       {artists
-        .filter(artist => artist.images.length > 0)
+        .filter(
+          artist =>
+            artist.images.length > 0 &&
+            artist.name.toLowerCase().includes(pattern)
+        )
         .map(artist => <Artist key={artist.id} artist={artist} />)}
     </div>
   )
