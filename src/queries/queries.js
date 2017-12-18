@@ -145,3 +145,19 @@ export const myPlaylistTracks = gql`
     }
   }
 `
+
+export const myArtists = gql`
+query myArtists($token: String!, $limit: Int) {
+  myArtists(token: $token, limit: $limit) {
+    items {
+      id
+      name
+      images {
+        url
+      }
+    }
+    total
+    limit
+  }
+}
+`
