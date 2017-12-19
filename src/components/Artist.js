@@ -1,7 +1,12 @@
 import React from 'react'
 import '../styles/artist.css'
+import { withRouter } from 'react-router-dom'
 
-const Artist = ({ artist }) => {
+const Artist = ({ artist, history }) => {
+  function changeRoute() {
+    history.push(`/artists/${artist.id}`)
+  }
+
   return (
     <div className="artist-wrapper">
       <div className="image-box">
@@ -12,7 +17,7 @@ const Artist = ({ artist }) => {
           width="200"
           className="artist-image"
         />
-        <div className="faded-box" />
+        <div className="faded-box" onClick={changeRoute} />
         <div className="play-image-button" />
       </div>
       <p className="artist-name">{artist.name}</p>
@@ -20,4 +25,4 @@ const Artist = ({ artist }) => {
   )
 }
 
-export default Artist
+export default withRouter(Artist)

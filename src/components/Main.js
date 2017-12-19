@@ -6,7 +6,8 @@ import PlaylistDetailsContainer from './PlaylistDetailsContainer'
 import AlbumDetailsContainer from './AlbumDetailsContainer'
 import AlbumsContainer from './AlbumsContainer'
 import TracksContainer from './TracksContainer'
-import ArtistsContainer from './ArtistsContainer'
+
+import ArtistsRouter from './ArtistsRouter'
 
 class Main extends React.Component {
   render() {
@@ -38,9 +39,8 @@ class Main extends React.Component {
           render={() => <TracksContainer token={this.props.token} />}
         />
         <Route
-          exact
           path="/artists"
-          render={() => <ArtistsContainer token={this.props.token} />}
+          render={() => <ArtistsRouter token={this.props.token} />}
         />
       </Switch>
     )

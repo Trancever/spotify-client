@@ -147,17 +147,29 @@ export const myPlaylistTracks = gql`
 `
 
 export const myArtists = gql`
-query myArtists($token: String!, $limit: Int) {
-  myArtists(token: $token, limit: $limit) {
-    items {
-      id
+  query myArtists($token: String!, $limit: Int) {
+    myArtists(token: $token, limit: $limit) {
+      items {
+        id
+        name
+        images {
+          url
+        }
+      }
+      total
+      limit
+    }
+  }
+`
+
+export const artist = gql`
+  query artist($token: String!, $artistId: String!) {
+    artist(token: $token, artistId: $artistId) {
       name
+      id
       images {
         url
       }
     }
-    total
-    limit
   }
-}
 `
