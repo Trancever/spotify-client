@@ -64,7 +64,9 @@ class TracksDetailedList extends React.Component {
                 <div className="index-column">{index + 1}</div>
                 <div className="title-column ellipsis-wrap">{track.name}</div>
                 <div className="artist-column ellipsis-wrap">
-                  <Link to="">{track.artists[0].name}</Link>
+                  <Link to={`/artists/${track.artists[0].id}`}>
+                    {track.artists[0].name}
+                  </Link>
                 </div>
                 <div className="album-column ellipsis-wrap">
                   <Link to={`/album/${track.album.id}`}>
