@@ -64,7 +64,6 @@ class AlbumsContainer extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return [
       <div className="albums-header" key="header">
         <FilterableHeader

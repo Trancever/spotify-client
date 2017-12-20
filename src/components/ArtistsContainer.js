@@ -24,7 +24,6 @@ class ArtistsContainer extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return [
       <div key="header" className="artists-header">
         <FilterableHeader

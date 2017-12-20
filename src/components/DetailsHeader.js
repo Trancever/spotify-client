@@ -1,10 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import '../styles/playlistDetailsHeader.css'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 
-import { myAlbums, checkAlbum } from '../queries/queries'
 import PlayButton from './PlayButton'
 import Savebutton from './SaveButton'
 
@@ -14,7 +11,7 @@ const DetailsHeader = ({
   description,
   createdBy,
   type,
-  mutate,
+  onSaveClick,
   token,
   albumId,
   isSaved,
@@ -22,32 +19,6 @@ const DetailsHeader = ({
   function handleButtonClick() {
     console.log('Button clicked')
   }
-
-  function handleSave() {
-    mutate({
-      variables: {
-        token: token,
-        albumId: albumId,
-      },
-      refetchQueries: [
-        {
-          query: myAlbums,
-          variables: {
-            token: token,
-            limit: 30,
-          },
-        },
-        {
-          query: checkAlbum,
-          variables: {
-            token: token,
-            albumId: albumId,
-          },
-        },
-      ],
-    }).then(res => console.log(res))
-  }
-
   return (
     <div className="wrapper">
       <div className="header-box">
@@ -71,7 +42,7 @@ const DetailsHeader = ({
             <div className="buttons-container">
               <PlayButton onClick={handleButtonClick} />
               <Savebutton
-                onClick={handleSave}
+                onClick={onSaveClick}
                 text={isSaved ? 'SAVED' : 'SAVE'}
               />
             </div>
@@ -82,38 +53,16 @@ const DetailsHeader = ({
   )
 }
 
-const saveAlbumForUser = gql`
-  mutation saveAlbumForUser($token: String!, $albumId: String!) {
-    saveAlbumForUser(token: $token, albumId: $albumId) {
-      id
-      name
-      images {
-        url
-      }
-      artists {
-        id
-        name
-      }
-      popularity
-      tracks {
-        items {
-          id
-          name
-          duration_ms
-        }
-      }
-    }
-  }
-`
-
 DetailsHeader.propTypes = {
   imageUrl: PropTypes.string,
   name: PropTypes.string,
   description: PropTypes.string,
   createdBy: PropTypes.string,
+  type: PropTypes.string,
   albumId: PropTypes.string,
   token: PropTypes.string,
-  mutate: PropTypes.func,
+  onSaveClick: PropTypes.func,
+  isSaved: PropTypes.bool,
 }
 
-export default graphql(saveAlbumForUser)(DetailsHeader)
+export default DetailsHeader

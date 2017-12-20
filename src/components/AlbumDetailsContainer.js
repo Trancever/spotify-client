@@ -1,14 +1,52 @@
 import React from 'react'
 import { graphql, compose } from 'react-apollo'
 
-import { album, checkAlbum } from '../queries/queries'
+import {
+  album,
+  checkAlbum,
+  saveAlbumForUser,
+  myAlbums,
+} from '../queries/queries'
 import DetailsHeader from './DetailsHeader'
 import TracksList from './TracksList'
 
 class AlbumDetailsContainer extends React.Component {
+  constructor() {
+    super()
+    this.saveAlbum = this.saveAlbum.bind(this)
+  }
+
   componentWillReceiveProps(nextProps) {
     if (this.props.albumData.album) {
       nextProps.albumData.album = this.props.albumData.album
+    }
+  }
+
+  saveAlbum(albumId) {
+    const { mutate, token } = this.props
+    return () => {
+      mutate({
+        variables: {
+          token: token,
+          albumId: albumId,
+        },
+        refetchQueries: [
+          {
+            query: myAlbums,
+            variables: {
+              token: token,
+              limit: 30,
+            },
+          },
+          {
+            query: checkAlbum,
+            variables: {
+              token: token,
+              albumId: albumId,
+            },
+          },
+        ],
+      }).then(res => console.log(res))
     }
   }
 
@@ -27,6 +65,7 @@ class AlbumDetailsContainer extends React.Component {
             token={this.props.token}
             albumId={data.id}
             isSaved={this.props.checkAlbum.checkUserAlbum.data[0]}
+            onSaveClick={this.saveAlbum(data.id)}
           />
         )}
       </div>,
@@ -61,5 +100,6 @@ export default compose(
       }
     },
     name: 'checkAlbum',
-  })
+  }),
+  graphql(saveAlbumForUser)
 )(AlbumDetailsContainer)

@@ -173,3 +173,27 @@ export const artist = gql`
     }
   }
 `
+
+export const saveAlbumForUser = gql`
+  mutation saveAlbumForUser($token: String!, $albumId: String!) {
+    saveAlbumForUser(token: $token, albumId: $albumId) {
+      id
+      name
+      images {
+        url
+      }
+      artists {
+        id
+        name
+      }
+      popularity
+      tracks {
+        items {
+          id
+          name
+          duration_ms
+        }
+      }
+    }
+  }
+`
