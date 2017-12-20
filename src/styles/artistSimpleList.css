@@ -1,0 +1,35 @@
+.artist-list-title {
+  color: #dedede;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+}
+
+.artist-simple-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.artist-list-item {
+  color: #ddd;
+  display: flex;
+  height: 48px;
+  align-items: center;
+}
+
+.artist-list-item:hover {
+  background: #232323;
+  cursor: pointer;
+}
+
+.artist-list-item-image {
+  border-radius: 50%;
+  margin-right: 20px;
+  margin-left: 5px;
+}
+
+.artist-list-item-name {
+  color: #ccc;
+  font-size: 14px;
+  font-weight: 600;
+}

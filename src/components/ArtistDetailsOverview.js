@@ -5,6 +5,7 @@ import { graphql, compose } from 'react-apollo'
 import { artistTopTracks, artistRelatedArtists } from '../queries/queries'
 import TracksList from './TracksList'
 import SaveButton from './SaveButton'
+import ArtistSimpleList from './ArtistSimpleList'
 
 class ArtistDetailsOverview extends React.Component {
   constructor() {
@@ -23,11 +24,17 @@ class ArtistDetailsOverview extends React.Component {
 
   render() {
     const { popularTracksListExpanded } = this.state
+    const { artistRelatedArtists } = this.props.artistRelatedArtists
     const { artistTopTracks } = this.props.artistTopTracks
     const tracks = artistTopTracks ? artistTopTracks.tracks : []
     const slicedTracks = popularTracksListExpanded
       ? tracks.slice(0, 10)
       : tracks.slice(0, 5)
+    const artists = artistRelatedArtists ? artistRelatedArtists.artists : []
+    const filteredArtists = artists.filter(artist => artist.images.length > 0)
+    const slicedArtists = popularTracksListExpanded
+      ? filteredArtists.slice(0, 9)
+      : filteredArtists.slice(0, 5)
     return (
       <div className="top-artist-details-wrapper">
         <div className="left-artist-details-box">
@@ -44,7 +51,9 @@ class ArtistDetailsOverview extends React.Component {
             </div>
           ) : null}
         </div>
-        <div className="right-artist-details-box" />
+        <div className="right-artist-details-box">
+          <ArtistSimpleList artists={slicedArtists} />
+        </div>
       </div>
     )
   }

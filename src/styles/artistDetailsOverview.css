@@ -1,5 +1,6 @@
 .top-artist-details-wrapper {
   display: flex;
+  margin: 0 50px 0 10px;
 }
 
 .left-artist-details-box {
@@ -13,6 +14,7 @@
 .popular-tracks-title {
   color: #dedede;
   font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
   margin-left: 40px;
   margin-top: 30px;
 }
