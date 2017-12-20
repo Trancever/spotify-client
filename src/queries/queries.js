@@ -218,3 +218,17 @@ export const artistTopTracks = gql`
     }
   }
 `
+
+export const artistRelatedArtists = gql`
+  query artistRelatedArtists($token: String!, $artistId: String!) {
+    artistRelatedArtists(token: $token, artistId: $artistId) {
+      artists {
+        id
+        name
+        images {
+          url
+        }
+      }
+    }
+  }
+`

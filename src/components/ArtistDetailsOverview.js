@@ -1,8 +1,8 @@
 import React from 'react'
 import '../styles/artistDetailsOverview.css'
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 
-import { artistTopTracks } from '../queries/queries'
+import { artistTopTracks, artistRelatedArtists } from '../queries/queries'
 import TracksList from './TracksList'
 import SaveButton from './SaveButton'
 
@@ -23,7 +23,7 @@ class ArtistDetailsOverview extends React.Component {
 
   render() {
     const { popularTracksListExpanded } = this.state
-    const { artistTopTracks } = this.props.data
+    const { artistTopTracks } = this.props.artistTopTracks
     const tracks = artistTopTracks ? artistTopTracks.tracks : []
     const slicedTracks = popularTracksListExpanded
       ? tracks.slice(0, 10)
@@ -50,14 +50,28 @@ class ArtistDetailsOverview extends React.Component {
   }
 }
 
-export default graphql(artistTopTracks, {
-  options: props => {
-    return {
-      variables: {
-        token: props.token,
-        artistId: props.artistId,
-        country: 'US',
-      },
-    }
-  },
-})(ArtistDetailsOverview)
+export default compose(
+  graphql(artistTopTracks, {
+    options: props => {
+      return {
+        variables: {
+          token: props.token,
+          artistId: props.artistId,
+          country: 'US',
+        },
+      }
+    },
+    name: 'artistTopTracks',
+  }),
+  graphql(artistRelatedArtists, {
+    options: props => {
+      return {
+        variables: {
+          token: props.token,
+          artistId: props.artistId,
+        },
+      }
+    },
+    name: 'artistRelatedArtists',
+  })
+)(ArtistDetailsOverview)
