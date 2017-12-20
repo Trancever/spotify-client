@@ -5,7 +5,7 @@ import { SyncLoader } from 'react-spinners'
 
 import { milisecondsToMMSS } from '../utils/utils'
 
-const TracksList = ({ data, fetchMoreData, fetchingMoreData }) => {
+const TracksList = ({ data, fetchMoreData, fetchingMoreData = false }) => {
   return (
     <div className="album-details-tracks-container">
       <ul className="album-tracks-list">

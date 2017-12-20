@@ -1,0 +1,23 @@
+.top-artist-details-wrapper {
+  display: flex;
+}
+
+.left-artist-details-box {
+  flex: 2;
+}
+
+.right-artist-details-box {
+  flex: 1;
+}
+
+.popular-tracks-title {
+  color: #dedede;
+  font-family: 'Open Sans', sans-serif;
+  margin-left: 40px;
+  margin-top: 30px;
+}
+
+.artist-details-button-container {
+  margin-left: 30px;
+  margin-top: -20px;
+}

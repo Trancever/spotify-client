@@ -5,6 +5,7 @@ import { graphql } from 'react-apollo'
 import { artist } from '../queries/queries'
 import DetailsHeader from './DetailsHeader'
 import TabPanel from './TabPanel'
+import ArtistDetailsOverview from './ArtistDetailsOverview'
 
 const tabPanelData = [
   { id: 1, label: 'OVERVIEW' },
@@ -43,6 +44,12 @@ class ArtistDetailsContainer extends React.Component {
           selectedId={this.state.selectedTabId}
           onTabChange={this.onTabChange}
         />
+        {this.state.selectedTabId === 1 && this.props.data.artist ? (
+          <ArtistDetailsOverview
+            token={this.props.token}
+            artistId={this.props.data.artist.id}
+          />
+        ) : null}
       </div>,
     ]
   }

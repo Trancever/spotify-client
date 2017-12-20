@@ -197,3 +197,24 @@ export const saveAlbumForUser = gql`
     }
   }
 `
+
+export const artistTopTracks = gql`
+  query artistTopTracks(
+    $token: String!
+    $artistId: String!
+    $country: String!
+  ) {
+    artistTopTracks(token: $token, artistId: $artistId, country: $country) {
+      tracks {
+        id
+        name
+        album {
+          images {
+            url
+          }
+        }
+        duration_ms
+      }
+    }
+  }
+`
