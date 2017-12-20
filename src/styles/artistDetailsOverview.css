@@ -22,5 +22,9 @@
 }
 
 .artist-details-button-container {
-  margin-top: -20px;
+  margin-top: -30px;
+}
+
+.tracklist-wrapper {
+  margin-right: 10px;
 }

@@ -10,16 +10,20 @@ const SimpleAlbumHeader = ({ album }) => {
       <div className="simple-album-header-left">
         <img
           src={album.images[0].url}
-          width="200"
-          height="200"
+          width="150"
+          height="150"
           alt=""
           className="simple-album-header-image"
         />
       </div>
       <div className="simple-album-header-right">
-        <p className="simple-album-header-year">2016</p>
-        <p className="simple-album-header-name">{album.name}</p>
-        <SaveButton text="save" />
+        <div className="simple-album-header-right-top">
+          <p className="simple-album-header-year">2016</p>
+          <p className="simple-album-header-name">{album.name}</p>
+        </div>
+        <div className="simple-album-header-right-bottom">
+          <SaveButton text="save" />
+        </div>
       </div>
     </div>
   )

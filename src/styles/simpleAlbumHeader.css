@@ -5,13 +5,38 @@
 .simple-album-header-left {
   display: flex;
   align-items: flex-end;
+  margin-right: 20px;
 }
 
 .simple-album-header-right {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
 .simple-album-header-image {
+}
+
+.simple-album-header-right-top {
+  margin-top: 7px;
+}
+
+.simple-album-header-right-bottom {
+  margin-bottom: 7px;
+}
+
+.simple-album-header-year {
+  font-size: 13px;
+  color: #ccc;
+  margin: 0;
+  letter-spacing: 1px;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.simple-album-header-name {
+  font-size: 28px;
+  font-weight: bold;
+  color: #dedede;
+  margin: 10px 0 0 0;
+  letter-spacing: 1px;
 }

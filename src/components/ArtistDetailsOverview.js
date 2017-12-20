@@ -58,7 +58,9 @@ class ArtistDetailsOverview extends React.Component {
             {tracks.length > 0 ? (
               <div>
                 <p className="popular-tracks-title">Popular</p>
-                <TracksList data={slicedTracks} />
+                <div className="tracklist-wrapper">
+                  <TracksList data={slicedTracks} />
+                </div>
                 <div className="artist-details-button-container">
                   <SaveButton
                     text={popularTracksListExpanded ? 'Hide 5' : 'Show 5 more'}
