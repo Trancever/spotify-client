@@ -4,8 +4,27 @@ import { graphql } from 'react-apollo'
 
 import { artist } from '../queries/queries'
 import DetailsHeader from './DetailsHeader'
+import TabPanel from './TabPanel'
+
+const tabPanelData = [
+  { id: 1, label: 'OVERVIEW' },
+  { id: 2, label: 'RELATED ARTISTS' },
+  { id: 3, label: 'ABOUT' },
+]
 
 class ArtistDetailsContainer extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      selectedTabId: 1,
+    }
+    this.onTabChange = this.onTabChange.bind(this)
+  }
+
+  onTabChange(tabId) {
+    this.setState({ selectedTabId: tabId })
+  }
+
   render() {
     return [
       <div key="header" className="artist-details-header">
@@ -18,7 +37,13 @@ class ArtistDetailsContainer extends React.Component {
           />
         )}
       </div>,
-      <div key="main" className="artist-details-tracks" />,
+      <div key="main" className="artist-details-tracks">
+        <TabPanel
+          data={tabPanelData}
+          selectedId={this.state.selectedTabId}
+          onTabChange={this.onTabChange}
+        />
+      </div>,
     ]
   }
 }
