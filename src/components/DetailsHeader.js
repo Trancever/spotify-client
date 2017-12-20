@@ -1,12 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import '../styles/playlistDetailsHeader.css'
+import '../styles/detailsHeader.css'
 
 import PlayButton from './PlayButton'
 import Savebutton from './SaveButton'
 
 const DetailsHeader = ({
   imageUrl,
+  circleImage,
   name,
   description,
   createdBy,
@@ -24,9 +25,8 @@ const DetailsHeader = ({
       <div className="header-box">
         <div className="left-box">
           <img
-            className="header-image"
+            className={circleImage ? 'header-image circled' : 'header-image'}
             src={imageUrl}
-            alt="Nothing"
             width="230"
             height="230"
           />
@@ -38,7 +38,9 @@ const DetailsHeader = ({
             {description ? (
               <p className="grey-text small-text">{description}</p>
             ) : null}
-            <p className="grey-text small-text">Created by: {createdBy}</p>
+            {createdBy ? (
+              <p className="grey-text small-text">Created by: {createdBy}</p>
+            ) : null}
             <div className="buttons-container">
               <PlayButton onClick={handleButtonClick} />
               <Savebutton
@@ -63,6 +65,7 @@ DetailsHeader.propTypes = {
   token: PropTypes.string,
   onSaveClick: PropTypes.func,
   isSaved: PropTypes.bool,
+  circleImage: PropTypes.bool,
 }
 
 export default DetailsHeader

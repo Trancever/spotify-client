@@ -14,6 +14,7 @@ class ArtistDetailsContainer extends React.Component {
             imageUrl={this.props.data.artist.images[0].url}
             name={this.props.data.artist.name}
             type="ARTIST"
+            circleImage
           />
         )}
       </div>,
