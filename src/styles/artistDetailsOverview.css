@@ -18,7 +18,7 @@
 .popular-tracks-title {
   color: #dedede;
   font-family: 'Open Sans', sans-serif;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .artist-details-button-container {
@@ -27,4 +27,15 @@
 
 .tracklist-wrapper {
   margin-right: 10px;
+}
+
+.artist-albums-title {
+  color: #dedede;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  margin: 0;
+}
+
+.artist-albums-container {
+  margin-top: 20px;
 }

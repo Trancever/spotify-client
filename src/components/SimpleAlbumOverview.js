@@ -4,6 +4,7 @@ import { graphql } from 'react-apollo'
 
 import { album } from '../queries/queries'
 import SimpleAlbumHeader from './SimpleAlbumHeader'
+import TracksList from './TracksList'
 
 const SimpleAlbumOverview = props => {
   const { album } = props.data
@@ -11,7 +12,9 @@ const SimpleAlbumOverview = props => {
   return (
     <div className="simple-album-overview">
       {props.data.loading ? null : <SimpleAlbumHeader album={album} />}
-      <div className="simple-album-overview-main" />
+      <div className="simple-album-overview-main">
+        {props.data.loading ? null : <TracksList data={album.tracks.items} />}
+      </div>
     </div>
   )
 }

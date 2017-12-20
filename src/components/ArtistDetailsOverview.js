@@ -39,6 +39,7 @@ class ArtistDetailsOverview extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     const { popularTracksListExpanded } = this.state
     const { artistRelatedArtists } = this.props.artistRelatedArtists
     const { artistTopTracks } = this.props.artistTopTracks
@@ -74,6 +75,7 @@ class ArtistDetailsOverview extends React.Component {
             <ArtistSimpleList artists={slicedArtists} />
           </div>
         </div>
+        <p className="artist-albums-title">Albums</p>
         <HorizontalLine />
         <div className="artist-albums-container">
           {this.props.artistAlbums.loading ? null : this.renderAlbums()}

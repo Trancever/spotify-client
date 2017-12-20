@@ -4,7 +4,6 @@ import '../styles/simpleAlbumHeader.css'
 import SaveButton from './SaveButton'
 
 const SimpleAlbumHeader = ({ album }) => {
-  console.log('Simple album header', album)
   return (
     <div className="simple-album-header">
       <div className="simple-album-header-left">
