@@ -43,10 +43,12 @@ const DetailsHeader = ({
             ) : null}
             <div className="buttons-container">
               <PlayButton onClick={handleButtonClick} />
-              <Savebutton
-                onClick={onSaveClick}
-                text={isSaved ? 'SAVED' : 'SAVE'}
-              />
+              <div className="margin-left-10">
+                <Savebutton
+                  onClick={onSaveClick}
+                  text={isSaved ? 'SAVED' : 'SAVE'}
+                />
+              </div>
             </div>
           </div>
         </div>

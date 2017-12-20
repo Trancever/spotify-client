@@ -64,3 +64,11 @@
 .circled {
   border-radius: 50%;
 }
+
+.margin-left-10 {
+  margin-left: 10px;
+}
+
+.buttons-container {
+  display: flex;
+}
