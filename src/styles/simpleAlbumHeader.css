@@ -1,0 +1,17 @@
+.simple-album-header {
+  display: flex;
+}
+
+.simple-album-header-left {
+  display: flex;
+  align-items: flex-end;
+}
+
+.simple-album-header-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.simple-album-header-image {
+}

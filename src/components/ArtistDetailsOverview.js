@@ -2,10 +2,16 @@ import React from 'react'
 import '../styles/artistDetailsOverview.css'
 import { graphql, compose } from 'react-apollo'
 
-import { artistTopTracks, artistRelatedArtists } from '../queries/queries'
+import {
+  artistTopTracks,
+  artistRelatedArtists,
+  artistAlbums,
+} from '../queries/queries'
 import TracksList from './TracksList'
 import SaveButton from './SaveButton'
 import ArtistSimpleList from './ArtistSimpleList'
+import SimpleAlbumOverview from './SimpleAlbumOverview'
+import HorizontalLine from './HorizontalLine'
 
 class ArtistDetailsOverview extends React.Component {
   constructor() {
@@ -22,6 +28,16 @@ class ArtistDetailsOverview extends React.Component {
     }))
   }
 
+  renderAlbums() {
+    return this.props.artistAlbums.artistAlbums.items.map(album => (
+      <SimpleAlbumOverview
+        key={album.id}
+        token={this.props.token}
+        albumId={album.id}
+      />
+    ))
+  }
+
   render() {
     const { popularTracksListExpanded } = this.state
     const { artistRelatedArtists } = this.props.artistRelatedArtists
@@ -36,23 +52,29 @@ class ArtistDetailsOverview extends React.Component {
       ? filteredArtists.slice(0, 9)
       : filteredArtists.slice(0, 5)
     return (
-      <div className="top-artist-details-wrapper">
-        <div className="left-artist-details-box">
-          {tracks.length > 0 ? (
-            <div>
-              <p className="popular-tracks-title">Popular</p>
-              <TracksList data={slicedTracks} />
-              <div className="artist-details-button-container">
-                <SaveButton
-                  text={popularTracksListExpanded ? 'Hide 5' : 'Show 5 more'}
-                  onClick={this.handleButtonClick}
-                />
+      <div className="artist-details-container">
+        <div className="top-artist-details-wrapper">
+          <div className="left-artist-details-box">
+            {tracks.length > 0 ? (
+              <div>
+                <p className="popular-tracks-title">Popular</p>
+                <TracksList data={slicedTracks} />
+                <div className="artist-details-button-container">
+                  <SaveButton
+                    text={popularTracksListExpanded ? 'Hide 5' : 'Show 5 more'}
+                    onClick={this.handleButtonClick}
+                  />
+                </div>
               </div>
-            </div>
-          ) : null}
+            ) : null}
+          </div>
+          <div className="right-artist-details-box">
+            <ArtistSimpleList artists={slicedArtists} />
+          </div>
         </div>
-        <div className="right-artist-details-box">
-          <ArtistSimpleList artists={slicedArtists} />
+        <HorizontalLine />
+        <div className="artist-albums-container">
+          {this.props.artistAlbums.loading ? null : this.renderAlbums()}
         </div>
       </div>
     )
@@ -82,5 +104,14 @@ export default compose(
       }
     },
     name: 'artistRelatedArtists',
+  }),
+  graphql(artistAlbums, {
+    options: props => ({
+      variables: {
+        token: props.token,
+        artistId: props.artistId,
+      },
+    }),
+    name: 'artistAlbums',
   })
 )(ArtistDetailsOverview)

@@ -232,3 +232,25 @@ export const artistRelatedArtists = gql`
     }
   }
 `
+
+export const artistAlbums = gql`
+  query artistAlbums(
+    $token: String!
+    $artistId: String!
+    $limit: Int
+    $offset: Int
+  ) {
+    artistAlbums(
+      token: $token
+      artistId: $artistId
+      limit: $limit
+      offset: $offset
+    ) {
+      items {
+        id
+        name
+        album_type
+      }
+    }
+  }
+`
