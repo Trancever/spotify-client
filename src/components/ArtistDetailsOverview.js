@@ -28,30 +28,47 @@ class ArtistDetailsOverview extends React.Component {
     }))
   }
 
-  renderAlbums() {
-    return this.props.artistAlbums.artistAlbums.items.map(album => (
-      <SimpleAlbumOverview
-        key={album.id}
-        token={this.props.token}
-        albumId={album.id}
-      />
-    ))
+  filterAlbums(albums) {
+    return albums.filter(album => album.album_type === 'album')
+  }
+
+  filterSingles(albums) {
+    return albums.filter(album => album.album_type === 'single')
+  }
+
+  renderAlbums(albums, text) {
+    return albums.length > 0 ? (
+      <div className="artist-albums-container">
+        <p className="artist-albums-title">{text}</p>
+        <HorizontalLine />
+        {albums.map(album => (
+          <SimpleAlbumOverview
+            key={album.id}
+            token={this.props.token}
+            albumId={album.id}
+          />
+        ))}
+      </div>
+    ) : null
   }
 
   render() {
-    console.log(this.props)
     const { popularTracksListExpanded } = this.state
     const { artistRelatedArtists } = this.props.artistRelatedArtists
     const { artistTopTracks } = this.props.artistTopTracks
+    const { artistAlbums } = this.props.artistAlbums
+
     const tracks = artistTopTracks ? artistTopTracks.tracks : []
     const slicedTracks = popularTracksListExpanded
       ? tracks.slice(0, 10)
       : tracks.slice(0, 5)
+
     const artists = artistRelatedArtists ? artistRelatedArtists.artists : []
     const filteredArtists = artists.filter(artist => artist.images.length > 0)
     const slicedArtists = popularTracksListExpanded
       ? filteredArtists.slice(0, 9)
       : filteredArtists.slice(0, 5)
+
     return (
       <div className="artist-details-container">
         <div className="top-artist-details-wrapper">
@@ -75,11 +92,14 @@ class ArtistDetailsOverview extends React.Component {
             <ArtistSimpleList artists={slicedArtists} />
           </div>
         </div>
-        <p className="artist-albums-title">Albums</p>
-        <HorizontalLine />
-        <div className="artist-albums-container">
-          {this.props.artistAlbums.loading ? null : this.renderAlbums()}
-        </div>
+        {this.renderAlbums(
+          this.filterSingles(artistAlbums ? artistAlbums.items : []),
+          'Singles'
+        )}
+        {this.renderAlbums(
+          this.filterAlbums(artistAlbums ? artistAlbums.items : []),
+          'Albums'
+        )}
       </div>
     )
   }
