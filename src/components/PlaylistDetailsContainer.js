@@ -68,7 +68,7 @@ class PlaylistDetailsContainer extends React.Component {
         )}
       </div>,
       <div className="playlist-details-wrapper" key="main">
-        {this.props.myPlaylist.loading ? null : (
+        {this.props.myPlaylistTracks.loading ? null : (
           <TracksDetailedList
             data={this.props.myPlaylistTracks.myPlaylistTracks.items}
             fetchMoreData={this.fetchMoreData}

@@ -135,6 +135,7 @@ export const myPlaylistTracks = gql`
             id
           }
           artists {
+            id
             name
           }
         }

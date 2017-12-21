@@ -3,12 +3,15 @@ import '../styles/simpleAlbumHeader.css'
 
 import SaveButton from './SaveButton'
 
+const defaultImageUrl =
+  'https://lh4.ggpht.com/DGyWJI9fkNukhRXMuE46cnzXMkhfskc3nTfm-jmKt3P9eUITBMLDdU51omlCt2Jbzw=w300'
+
 const SimpleAlbumHeader = ({ album }) => {
   return (
     <div className="simple-album-header">
       <div className="simple-album-header-left">
         <img
-          src={album.images[0].url}
+          src={album.images.length > 0 ? album.images[0].url : defaultImageUrl}
           width="150"
           height="150"
           alt=""

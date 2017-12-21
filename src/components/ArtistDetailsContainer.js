@@ -29,7 +29,7 @@ class ArtistDetailsContainer extends React.Component {
   render() {
     return [
       <div key="header" className="artist-details-header">
-        {this.props.data.loading ? null : (
+        {!this.props.data.artist ? null : (
           <DetailsHeader
             imageUrl={this.props.data.artist.images[0].url}
             name={this.props.data.artist.name}

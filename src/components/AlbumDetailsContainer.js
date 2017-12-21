@@ -1,4 +1,5 @@
 import React from 'react'
+import '../styles/albumDetailsContainer.css'
 import { graphql, compose } from 'react-apollo'
 
 import {
@@ -55,7 +56,7 @@ class AlbumDetailsContainer extends React.Component {
     const show =
       !this.props.albumData.album || !this.props.checkAlbum.checkUserAlbum
     return [
-      <div className="playlist-details-header" key="header">
+      <div className="album-details-header" key="header">
         {show ? null : (
           <DetailsHeader
             name={data.name}
@@ -69,7 +70,7 @@ class AlbumDetailsContainer extends React.Component {
           />
         )}
       </div>,
-      <div className="playlist-details-wrapper" key="main">
+      <div className="album-details-wrapper" key="main">
         {!this.props.albumData.album ? null : (
           <TracksList data={data.tracks.items} fetchingMoreData={false} />
         )}
