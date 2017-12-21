@@ -2,9 +2,10 @@ import React from 'react'
 import '../styles/artist.css'
 import { withRouter } from 'react-router-dom'
 
-const Artist = ({ artist, history }) => {
+const Artist = ({ artist, history, artistChanged = () => {} }) => {
   function changeRoute() {
     history.push(`/artists/${artist.id}`)
+    artistChanged()
   }
 
   return (

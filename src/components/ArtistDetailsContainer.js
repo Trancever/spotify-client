@@ -1,11 +1,12 @@
 import React from 'react'
 import '../styles/artistDetailsContainer.css'
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 
-import { artist } from '../queries/queries'
+import { artist, artistRelatedArtists } from '../queries/queries'
 import DetailsHeader from './DetailsHeader'
 import TabPanel from './TabPanel'
 import ArtistDetailsOverview from './ArtistDetailsOverview'
+import ArtistsGrid from './ArtistsGrid'
 
 const tabPanelData = [
   { id: 1, label: 'OVERVIEW' },
@@ -20,19 +21,27 @@ class ArtistDetailsContainer extends React.Component {
       selectedTabId: 1,
     }
     this.onTabChange = this.onTabChange.bind(this)
+    this.artistChanged = this.artistChanged.bind(this)
   }
 
   onTabChange(tabId) {
     this.setState({ selectedTabId: tabId })
   }
 
+  artistChanged() {
+    this.onTabChange(1)
+  }
+
   render() {
+    const { artist } = this.props
+    const { artistRelatedArtists } = this.props.artistRelatedArtists
+    const artists = artistRelatedArtists ? artistRelatedArtists.artists : []
     return [
       <div key="header" className="artist-details-header">
-        {!this.props.data.artist ? null : (
+        {!artist.artist ? null : (
           <DetailsHeader
-            imageUrl={this.props.data.artist.images[0].url}
-            name={this.props.data.artist.name}
+            imageUrl={artist.artist.images[0].url}
+            name={artist.artist.name}
             type="ARTIST"
             circleImage
           />
@@ -44,24 +53,42 @@ class ArtistDetailsContainer extends React.Component {
           selectedId={this.state.selectedTabId}
           onTabChange={this.onTabChange}
         />
-        {this.state.selectedTabId === 1 && this.props.data.artist ? (
+        {this.state.selectedTabId === 1 && artist.artist ? (
           <ArtistDetailsOverview
             token={this.props.token}
-            artistId={this.props.data.artist.id}
+            artistId={artist.artist.id}
+            artistRelatedArtists={artists}
           />
+        ) : null}
+        {this.state.selectedTabId === 2 && artist.artist ? (
+          <ArtistsGrid artists={artists} artistChanged={this.artistChanged} />
         ) : null}
       </div>,
     ]
   }
 }
 
-export default graphql(artist, {
-  options: props => {
-    return {
-      variables: {
-        token: props.token,
-        artistId: props.match.params.artistId,
-      },
-    }
-  },
-})(ArtistDetailsContainer)
+export default compose(
+  graphql(artist, {
+    options: props => {
+      return {
+        variables: {
+          token: props.token,
+          artistId: props.match.params.artistId,
+        },
+      }
+    },
+    name: 'artist',
+  }),
+  graphql(artistRelatedArtists, {
+    options: props => {
+      return {
+        variables: {
+          token: props.token,
+          artistId: props.match.params.artistId,
+        },
+      }
+    },
+    name: 'artistRelatedArtists',
+  })
+)(ArtistDetailsContainer)
